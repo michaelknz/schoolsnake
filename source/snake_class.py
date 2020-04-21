@@ -21,7 +21,7 @@ class Snake:
         self.body_pos[0][1] += self.dir[1] * self.speed
         if self.body_pos[0]==self.last_coord:
             self.Is_Exit=True
-        self.root.after(25)
+        self.root.after(15)
 
     def KeyBoard(self,x,y):
         self.dir[0]=x

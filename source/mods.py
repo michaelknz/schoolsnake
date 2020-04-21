@@ -63,9 +63,17 @@ def mode_2(screen):
             score.Apple_Is_Eatten()
         snake.Wall()
         nbuf=bufs.Is_Buffed(snake.body_pos[0])
+        bufs.Clean_buf()
         if nbuf!=-1:
             if nbuf=='tplus':
                 otimer.sec_col+=40
                 otimer.min_col+=int(otimer.sec_col//60)
                 otimer.sec_col=otimer.sec_col%60
+            if nbuf=='lucky':
+                ind=bufs.Gen_Rand_Int(0,1)
+                if ind==1:
+                    score.score+=100
+                    score.Set_Score()
+                else:
+                    break
         screen.root.update()
