@@ -4,6 +4,7 @@ from apple_class import Apple
 from timer import Timer
 from bufs import Bufs
 from score import Score
+from leader_table import Leader_Table
 
 def mode_1(screen):
     snake = Snake(screen)
@@ -32,6 +33,7 @@ def mode_1(screen):
         screen.root.update()
 
 def mode_2(screen):
+    leader_table=Leader_Table(screen)
     snake = Snake(screen)
     apple = Apple(screen)
 
@@ -77,3 +79,4 @@ def mode_2(screen):
                 else:
                     break
         screen.root.update()
+    leader_table.Update_T(score.score)

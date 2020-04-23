@@ -11,6 +11,7 @@ class Screen:
         self.root.title("Snake")
         self.root.resizable(height=False,width=False)
         self.root.geometry(str(self.width)+"x"+str(self.height)+"+"+str(self.del_x)+"+"+str(self.del_y))
+        self.root.attributes('-toolwindow', True)
         self.Create_Canvas()
 
     def Canvas_Pack(self):
