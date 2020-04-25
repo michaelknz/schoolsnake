@@ -80,3 +80,4 @@ def mode_2(screen):
                     break
         screen.root.update()
     leader_table.Update_T(score.score)
+    leader_table.Table_Visual()

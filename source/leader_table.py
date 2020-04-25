@@ -1,6 +1,7 @@
 from PIL import Image, ImageTk
 import tkinter
 from openpyxl import load_workbook
+from tkinter import ttk
 
 class Leader_Table:
     def __init__(self,screen):
@@ -53,7 +54,6 @@ class Leader_Table:
         mas.reverse()
         mas=mas[:self.led_col:]
 
-
     def Update_T(self,score):
         mas=[]
         for i in range(1,self.led_col+1):
@@ -65,3 +65,29 @@ class Leader_Table:
             self.table.cell(row=i, column=1, value=mas[i-1][0])
             self.table.cell(row=i, column=2, value=mas[i-1][1])
         self.wb.save('./leader_table.xlsx')
+
+    def Table_Visual(self):
+        self.Is_Over=False
+        self.scrn.Destroy_Canvas()
+        self.scrn.Create_Canvas()
+        self.background_label = tkinter.Label(self.scrn.root, image=self.img)
+        self.background_label.place(x=0, y=0, relwidth=1, relheight=1)
+        mas = []
+        for i in range(1, self.led_col + 1):
+            if self.table['A' + str(i)].value == None:
+                break
+            mas.append([self.table['A' + str(i)].value, self.table['B' + str(i)].value])
+        table=ttk.Treeview(self.scrn.root)
+        table["columns"] = ("one")
+        table.column('#0', width=270, minwidth=270, stretch=tkinter.NO)
+        table.column('one', width=150, minwidth=150, stretch=tkinter.NO)
+        table.heading("#0", text="Name", anchor=tkinter.W)
+        table.heading("one", text="Score", anchor=tkinter.W)
+        for i in range(1,len(mas)+1):
+            table.insert("", i, text=mas[i-1][0], values=(mas[i-1][1]))
+        table.pack(side=tkinter.TOP, fill=tkinter.X)
+        self.scrn.canvas.create_window((self.scrn.width // 2 - 200, self.scrn.height // 2-190), anchor="nw", window=table)
+        button=tkinter.Button(text="Next", background="brown", foreground="white", height=1, width=50, command=self.Button_Event)
+        self.scrn.canvas.create_window((self.scrn.width // 2 - 170, self.scrn.height // 2+70), anchor="nw", window=button)
+        self.Loop()
+        self.scrn.Destroy_Canvas()
