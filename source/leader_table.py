@@ -44,13 +44,13 @@ class Leader_Table:
                 b = False
                 if score>mas[i][1]:
                     mas[i][1]=score
-                    mas.sort()
+                    mas.sort(key=lambda x: x[1])
                     mas.reverse()
                     return
         if b:
             mas.append([self.name.get(),score])
-            mas.sort()
-            mas.reverse()
+        mas.sort(key=lambda x: x[1])
+        mas.reverse()
         mas=mas[:self.led_col:]
 
 
